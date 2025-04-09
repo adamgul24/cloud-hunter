@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ThreatBoard360 Live</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #0d1117; color: #c9d1d9; }
+        pre { background: #161b22; padding: 10px; border-radius: 5px; }
+        h1 { color: #58a6ff; }
+    </style>
+</head>
+<body>
+    <h1>🧠 ThreatBoard360 – Live Intelligence Mode</h1>
+    <p>Live threats loaded from DynamoDB every 10 seconds.</p>
+    <div id="output"><em>Loading...</em></div>
+
+    <script>
+        async function loadThreats() {
+            try {
+                const res = await fetch('/api/events');
+                const data = await res.json();
+                document.getElementById("output").innerHTML = "<pre>" + JSON.stringify(data.events, null, 2) + "</pre>";
+            } catch (err) {
+                document.getElementById("output").innerHTML = "<pre>Error loading threats</pre>";
+            }
+        }
+
+        loadThreats();
+        setInterval(loadThreats, 10000);
+    </script>
+</body>
+</html>
