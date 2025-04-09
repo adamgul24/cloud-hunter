@@ -73,7 +73,7 @@ terraform apply
 cd dashboard
 pip install flask boto3
 export DYNAMO_TABLE=CloudHunterThreatLogs
-python app.py
+python app.py 
 ```
 
 Visit: [http://localhost:5001](http://localhost:5001)
